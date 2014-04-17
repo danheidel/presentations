@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Website front end graphics - a how-to</title>
+
+    <meta name="description" content="A description of various HTML graphics presentation technologies">
+    <meta name="author" content="Dan Heidel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <link rel="stylesheet" href="css/my.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Front End Graphics</h1>
+          <h3>Making websites the hard way</h3>
+          <br>
+          <p>
+            <small>A short summary by <a href="http://danheidel.net">Dan Heidel</a> / <a href="http://twitter.com/danheidel">@danheidel</a></small>
+          </p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Why do you want to do this to yourself?</h2>
+            <br>
+            <p>
+              Graphics programming is HARD.  Expect to spend several times more effort to make a graphical page than a standard HTML page.
+            </p>
+          </section>
+          <section>
+            <h2>Why do you want to do this to yourself?</h2>
+            <br>
+            <p>
+              A graphical UI can make it difficult or impossible for visually impaired users to properly use your site.
+            </p>
+          </section>
+          <section>
+            <h2>Why do you want to do this to yourself?</h2>
+            <br>
+            <p>
+              Graphics will be difficult or impossible for search engines to properly index, potentially harming your SEO.
+            </p>
+          </section>
+          <section>
+            <h2>Why do you want to do this to yourself?</h2>
+            <br>
+            <h1>
+              :(
+            </h1>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Graphics</h1>
+            <br>
+            <br>
+            <br>
+            <div id="experiment">
+              <div id="cube">
+                <div class="face one">
+                  One face
+                </div>
+                <div class="face two">
+                  <div id="fromType-selector">
+                    <input type="radio" name="test1" id="fromChangetype-all" checked="checked">
+                    <input type="radio" name="test1" id="fromChangetype-establishment">
+                    <input type="radio" name="test1" id="fromChangetype-geocode">
+                  </div>
+                </div>
+                <div class="face three">
+                  <div id="fromType-selector">
+                    <input type="radio" name="test2" id="fromChangetype-all" checked="checked">
+                    <input type="radio" name="test2" id="fromChangetype-establishment">
+                    <input type="radio" name="test2" id="fromChangetype-geocode">
+                  </div>
+                </div>
+                <div class="face four">
+                  Look at me, I'm a cuuuuuube!
+                </div>
+                <div class="face five">
+                  Rotating 3D cube
+                </div>
+                <div class="face six">
+                  More content
+                </div>
+              </div>
+            </div>
+            <br>
+            <p>cube courtesy of: <a href = 'http://www.paulrhayes.com/experiments/cube-3d/'>http://www.paulrhayes.com/experiments/cube-3d/</a></p>
+          </section>
+          <section>
+            <h1>Look</h1>
+            <br>
+            <div style='height:400px;left:auto;right:auto'>
+              <canvas id='canvasCanvas'></canvas>
+            </div>
+            <br>
+            <p>canvas demo courtesy of: <a href='http://codepen.io/pixelgrid/pen/ECrKd'>http://codepen.io/pixelgrid/pen/ECrKd</a>
+          </section>
+          <section>
+            <h1><b>Awesome</b></h1>
+            <br>
+            <div id='openGL'></div>
+            <br>
+            <p>WebGL demo courtesy of: <a href='http://threejs.org/examples/#webgl_lines_sphere'>http://threejs.org/examples/#webgl_lines_sphere</a>
+          </section>
+        </section>
+
+        <section>
+          <h2>So, what options do we have to make graphics?</h2>
+          <br>
+          <h3>CSS/SVG</h3>
+          <h3>Canvas</h3>
+          <h3>OpenGL/WebGL</h3>
+        </section>
+
+        <section>
+          <section>
+            <h1>CSS/SVG</h1>
+            <br>
+            <h3>Modern CSS allows powerful animation and transformation capabilities</h3>
+            <h3>CSS 3D transformations allow virtual 3D animation</h3>
+            <ul>
+              <li>Smoothly scales with web page</li>
+              <li>Is widely supported by modern browsers</li>
+              <li>All elements are part of the DOM</li>
+              <li>Element manipulation is easy</li>
+              <li>Modern browsers provide hardware acceleration</li>
+            </ul>
+          </section>
+
+          <section>
+            <h1>CSS/SVG downsides</h1>
+            <br>
+            <ul>
+              <li>SVG animation can become slow with large numbers of elements</li>
+              <li>CSS transitions are limited in the types of animation they can do</li>
+              <li>CSS 3D transitions are not true 3D graphics</li>
+              <li>E.g.: CSS transitions are probably not good for making a game</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>CSS 3D transition support</h2>
+            <ul>
+              <li>Chrome - YES</li>
+              <li>Firefox - YES</li>
+              <li>Safari - YES</li>
+              <li>Opera - YES</li>
+              <li>IOS Safari - YES</li>
+              <li>Opera Mini - NO</li>
+              <li>Android - YES</li>
+              <li>IE 8 - NO</li>
+              <li>IE 9 - NO</li>
+              <li>IE 10+ - Partial</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>SVG learning resources</h2>
+            <ul>
+              <li><a href='http://www.html5rocks.com/en/tutorials/3d/css/'>HTML5 Rocks page</a></li>
+              <li><a href='https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_transforms'>MDN CSS transition page</a></li>
+              <li><a href='http://www.w3.org/TR/css-transforms-1/'>And the W3C reference for the masochistic</a></li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Canvas</h1>
+            <br>
+            <h3>Canvas is an HTML5 element that allows direct drawing to the screen</h3>
+            <ul>
+              <li>Allows arbitrary graphics to be drawn</li>
+              <li>Canvas is relatively fast</li>
+              <li>Canvas has excellent browser support</li>
+              <li>Canvas is hardware accelerated in modern browsers</li>
+              <li>Canvas is the method used for almost all HTML5 games</li>
+              <li>Canvas allows for multiple drawing surfaces allowing the generation of sprites</li>
+            </ul>
+          </section>
+
+          <section>
+            <h1>Canvas downsides</h1>
+            <br>
+            <ul>
+              <li>Canvas is a single DOM element - the internal graphics elements are not part of the DOM</li>
+              <li>Canvas graphics need to be redrawn</li>
+              <li>You need to do all the accounting to manipulate Canvas graphics</li>
+              <li>Any 3D graphics have to be manipulated in Javascript</li>
+            </ul>
+          </section>
+
+          <section>
+            <h1>Canvas support</h1>
+            <ul>
+              <li>Chrome - YES</li>
+              <li>Firefox - YES</li>
+              <li>Safari - YES</li>
+              <li>Opera - YES</li>
+              <li>IOS Safari - YES</li>
+              <li>Opera Mini - Partial</li>
+              <li>Android - YES</li>
+              <li>IE 8 - NO</li>
+              <li>IE 9+ - YES</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Canvas Javascript libraries</h2>
+            <ul>
+              <li><a href='http://processingjs.org/'>Processing</a></li>
+              <li><a href='http://kineticjs.com/'>KineticJS</a></li>
+              <li><a href='http://www.createjs.com/#!/EaselJS'>CreateJS - EaselJS</a></li>
+              <li><a href='http://fabricjs.com/'>FabricJS</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Canvas learning resources</h2>
+            <ul>
+              <li><a href='http://diveintohtml5.info/canvas.html'>Dive Into HTML5 Canvas tutorial</a></li>
+              <li><a href='https://developer.mozilla.org/en-US/docs/HTML/Canvas'>MDN Canvas page</a></li>
+              <li><a href='http://diveintohtml5.info/canvas.html'>W3C Canvas specs</a></li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>OpenGL/WebGL</h2>
+            <br>
+            <h3>WebGL is a new extension of the Canvas standard that allows full 3D graphics</h3>
+            <ul>
+              <li>WebGL is an extension of the OpenGL hardware accelerated graphic standard</li>
+              <li>WebGL provides full 3D graphics support including hardware acceleration of the 3D calculations</li>
+              <li>WebGL also provides hardwared accelerated lighting and textures</li>
+              <li>Fully featured modern games can be made in WebGL</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>WebGL downsides</h2>
+            <br>
+            <ul>
+              <li>WebGL support is currently not great</li>
+              <li>WebGL sufers from graphics card driver compatibility issues with browsers</li>
+              <li>Getting full WebGL functionality in a browser often requires the user modify advanced browser settings</li>
+              <li>WebGL graphics are also not DOM integrated</li>
+
+            </ul>
+          </section>
+
+          <section>
+            <h1>WebGL support</h1>
+            <ul>
+              <li>Chrome - YES</li>
+              <li>Firefox - Partial</li>
+              <li>Safari - Partial</li>
+              <li>Opera - YES</li>
+              <li>IOS Safari - NO</li>
+              <li>Opera Mini - NO</li>
+              <li>Android - NO</li>
+              <li>IE 8 - NO</li>
+              <li>IE 9 - NO</li>
+              <li>IE 10 - NO</li>
+              <li>IE 11+ - YES</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>WebGL Javascript libraries</h2>
+            <ul>
+              <li><a href='http://threejs.org/'>ThreeJS</a></li>
+              <li><a href='http://scenejs.org/'>SceneJS</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>WebGL learning resources</h2>
+            <ul>
+              <li><a href='http://learningwebgl.com/blog/'>Learning WebGL</a></li>
+              <li><a href='http://acko.net/tv/webglmath/'>Explanation of WebGL math</a></li>
+              <li><a href='https://developer.mozilla.org/en-US/docs/Web/WebGL'>MDN WegGL reference</a></li>
+              <li><a href='http://acko.net/'>A bunch of WebGL demos</a></li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>So, what to use?</h1>
+            <h2>First, identify what sort of application you have.</h2>
+            <ul>
+              <li>A set of real-time graphs that smoothly displays changing data</li>
+              <li>A 2D retro-style RPG game</li>
+              <li>A 3D music visualization app</li>
+              <li>A graph with several thousand points</li>
+              <li>A presentation software suite</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>A set of real-time graphs that smoothly displays changing data</h3>
+            <ul>
+              <li>SVG manipulation via CSS would work best</li>
+              <li>This gives smooth vector graphics</li>
+              <li>All of the elements are part of the DOM and can easily be recolored and resized via CSS</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>A 2D retro-style RPG game</h3>
+            <ul>
+              <li>Regular Canvas is recommended</li>
+              <li>Will work in most browers</li>
+              <li>Canvas sprite handling functions make animating small characters easy</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>A 3D music visualization app</h3>
+            <ul>
+              <li>WebGL would be recommended here</li>
+              <li>WebGL support of 3D animation allows very high performance graphics</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>A graph with several thousand points</h3>
+            <ul>
+              <li>A mixture of SVG elements/CSS transformations and a Canvas element is recommended</li>
+              <li>SVG elements for the axes and labels allow smooth, simple, rescalable UI elements</li>
+              <li>SVG elements will be too slow if thousands are required</li>
+              <li>A Canvas element layered under the SVG allows for fast visualization of the data points</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>A presentation software suite</h3>
+            <ul>
+              <li>CSS 3D transformations allow for simple yet impressive transition effects</li>
+              <li>All elements remain part of the DOM</li>
+              <li>The presentation software for this talk <a href='https://github.com/hakimel/reveal.js'>RevealJS</a> uses CSS 3D transforms</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <h1>THE END</h1>
+          <h3>BY Dan Heidel / <a href='http://danheidel.net'>danheidel.net</a></h3>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script src='js/jquery-2.1.0.js'></script>
+    <script src='js/Three.min.js'></script>
+    <script src="js/detector.js"></script>
+    <script src="js/stats.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+    <script>
+      //window.onload = window.rotateLeft;
+      var props = 'transform WebkitTransform MozTransform OTransform msTransform'.split(' '), prop, el = document.createElement('div');
+
+      for(var i = 0, l = props.length; i < l; i++) {
+          if(typeof el.style[props[i]] !== "undefined") {
+              prop = props[i];
+              break;
+          }
+      }
+
+      window.rotateCube = function(x, y){
+        //$('#cube').style.webkitTransform = "rotateY(-10deg)";
+        x += 10;
+        y += 5;
+        document.getElementById('cube').style[prop] = "rotateX("+x+"deg) rotateY("+y+"deg)";
+        window.setTimeout(rotateCube, 500, x, y);
+        console.log('rotate left');
+      };
+
+      window.rotateCube(0, 0);
+      //$('cube').style.webkitTransform = "rotateX(20deg) rotateY(10deg)";
+    </script>
+
+    <script>
+      var   canvas = document.getElementById('canvasCanvas'),
+        ctx = canvas.getContext('2d'),
+        particles = [],
+        patriclesNum = 200,
+        w = 900,
+        h = 400,
+        colors = ['#f35d4f','#f36849','#c0d988','#6ddaf1','#f1e85b'];
+
+      canvas.width = 900;
+      canvas.height = 400;
+      canvas.style.left = (window.innerWidth - 900)/2+'px';
+
+      if(window.innerHeight>400)
+      canvas.style.top = (window.innerHeight - 400)/2+'px';
+
+      function Factory(){
+        this.x =  Math.round( Math.random() * w);
+        this.y =  Math.round( Math.random() * h);
+        this.rad = Math.round( Math.random() * 1) + 1;
+        this.rgba = colors[ Math.round( Math.random() * 3) ];
+        this.vx = Math.round( Math.random() * 3) - 1.5;
+        this.vy = Math.round( Math.random() * 3) - 1.5;
+      }
+
+      function draw(){
+        ctx.clearRect(0, 0, w, h);
+        ctx.globalCompositeOperation = 'lighter';
+        for(var i = 0;i < patriclesNum; i++){
+          var temp = particles[i];
+          var factor = 1;
+
+          for(var j = 0; j<patriclesNum; j++){
+
+             var temp2 = particles[j];
+             ctx.linewidth = 0.5;
+
+             if(temp.rgba == temp2.rgba && findDistance(temp, temp2)<50){
+                ctx.strokeStyle = temp.rgba;
+                ctx.beginPath();
+                ctx.moveTo(temp.x, temp.y);
+                ctx.lineTo(temp2.x, temp2.y);
+                ctx.stroke();
+                factor++;
+             }
+          }
+
+
+          ctx.fillStyle = temp.rgba;
+          ctx.strokeStyle = temp.rgba;
+
+          ctx.beginPath();
+          ctx.arc(temp.x, temp.y, temp.rad*factor, 0, Math.PI*2, true);
+          ctx.fill();
+          ctx.closePath();
+
+          ctx.beginPath();
+          ctx.arc(temp.x, temp.y, (temp.rad+5)*factor, 0, Math.PI*2, true);
+          ctx.stroke();
+          ctx.closePath();
+
+
+          temp.x += temp.vx;
+          temp.y += temp.vy;
+
+          if(temp.x > w)temp.x = 0;
+          if(temp.x < 0)temp.x = w;
+          if(temp.y > h)temp.y = 0;
+          if(temp.y < 0)temp.y = h;
+        }
+      }
+
+      function findDistance(p1,p2){
+        return Math.sqrt( Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2) );
+      }
+
+      window.requestAnimFrame = (function(){
+        return  window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                function( callback ){
+                  window.setTimeout(callback, 1000 / 60);
+                };
+      })();
+
+      (function init(){
+        for(var i = 0; i < patriclesNum; i++){
+          particles.push(new Factory);
+        }
+      })();
+
+      (function loop(){
+        draw();
+        requestAnimFrame(loop);
+      })();
+
+    </script>
+
+    <script>
+
+      if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+      var SCREEN_WIDTH = window.innerWidth,
+        SCREEN_HEIGHT = window.innerHeight,
+
+      r = 450,
+
+      mouseX = 0, mouseY = 0,
+
+      windowHalfX = window.innerWidth / 2,
+      windowHalfY = window.innerHeight / 2,
+
+      camera, scene, renderer;
+
+      init();
+      animate();
+
+      function init() {
+
+        var container;
+
+        container = document.getElementById('openGL');
+        //document.body.appendChild( container );
+
+        camera = new THREE.PerspectiveCamera( 80, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 3000 );
+        camera.position.z = 1000;
+
+        scene = new THREE.Scene();
+
+        var i, line, vertex1, vertex2, material, p,
+          parameters = [ [ 0.25, 0xff7700, 1, 2 ], [ 0.5, 0xff9900, 1, 1 ], [ 0.75, 0xffaa00, 0.75, 1 ], [ 1, 0xffaa00, 0.5, 1 ], [ 1.25, 0x000833, 0.8, 1 ],
+                     [ 3.0, 0xaaaaaa, 0.75, 2 ], [ 3.5, 0xffffff, 0.5, 1 ], [ 4.5, 0xffffff, 0.25, 1 ], [ 5.5, 0xffffff, 0.125, 1 ] ],
+
+          geometry = new THREE.Geometry();
+
+
+        for ( i = 0; i < 1500; i ++ ) {
+
+          var vertex1 = new THREE.Vector3();
+          vertex1.x = Math.random() * 2 - 1;
+          vertex1.y = Math.random() * 2 - 1;
+          vertex1.z = Math.random() * 2 - 1;
+          vertex1.normalize();
+          vertex1.multiplyScalar( r );
+
+          vertex2 = vertex1.clone();
+          vertex2.multiplyScalar( Math.random() * 0.09 + 1 );
+
+          geometry.vertices.push( vertex1 );
+          geometry.vertices.push( vertex2 );
+
+        }
+
+        for( i = 0; i < parameters.length; ++ i ) {
+
+          p = parameters[ i ];
+
+          material = new THREE.LineBasicMaterial( { color: p[ 1 ], opacity: p[ 2 ], linewidth: p[ 3 ] } );
+
+          line = new THREE.Line( geometry, material, THREE.LinePieces );
+          line.scale.x = line.scale.y = line.scale.z = p[ 0 ];
+          line.originalScale = p[ 0 ];
+          line.rotation.y = Math.random() * Math.PI;
+          line.updateMatrix();
+          scene.add( line );
+
+        }
+
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setSize( SCREEN_WIDTH, 400 );
+        container.appendChild( renderer.domElement );
+        //renderer.domElement.style.width = '100%;';
+        //renderer.domElement.style.height = '100%;';
+        $('#openGL').children().css('width', '100%');
+        $('#openGL').children().css('width', '100%');
+        //
+
+        window.addEventListener( 'resize', onWindowResize, false );
+
+      }
+
+      function onWindowResize() {
+
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, 500 );
+
+      }
+
+      function animate() {
+
+        requestAnimationFrame( animate );
+
+        render();
+
+      }
+
+      function render() {
+
+        camera.position.y += ( - mouseY + 200 - camera.position.y ) * .05;
+        camera.lookAt( scene.position );
+
+        renderer.render( scene, camera );
+
+        var time = Date.now() * 0.0001;
+
+        for ( var i = 0; i < scene.children.length; i ++ ) {
+
+          var object = scene.children[ i ];
+
+          if ( object instanceof THREE.Line ) {
+
+            object.rotation.y = time * ( i < 4 ? ( i + 1 ) : - ( i + 1 ) );
+
+            if ( i < 5 ) object.scale.x = object.scale.y = object.scale.z = object.originalScale * (i/5+1) * (1 + 0.5 * Math.sin( 7*time ) );
+
+          }
+
+        }
+
+      }
+    </script>
+
+  </body>
+</html>

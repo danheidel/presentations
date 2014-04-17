@@ -1,0 +1,138 @@
+body{
+  background-color: #2C1210;
+}
+
+.menu,
+.menu ul{
+  position:absolute;
+}
+
+.menu{
+  height: 35rem;
+  width: 100%;
+  display: block;
+  background-color: #222;
+}
+
+.menu > li{
+  height: 100%;
+}
+
+.menu > li > a{
+  height: inherit;
+  line-height: 35rem;
+  font-weight: bold;
+  margin-right: 22rem;
+}
+
+.menu ul{
+  display:none;
+}
+
+.menu ul ul{
+  top: 0;
+  left:95%;
+  width: 100%;
+}
+
+.menu ul.parent_hover{
+  display:block;
+}
+
+.menu li{
+  position: relative;
+  float: left;
+}
+
+.menu li li{
+  width: 100%
+}
+
+.menu li:hover > ul{
+  display:block;
+}
+
+.menu a{
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  background-color: #222;
+}
+
+.menu ul a{
+  padding: 6rem;
+  font-weight: normal;
+}
+
+.menu a:hover{
+  background-color: #444;
+}
+
+.menu + *{
+  clear:left;
+}
+
+.menu .right{
+  float: right;
+}
+
+.menu .right ul{
+  right:0;
+}
+
+.menu .right ul ul{
+  top: 0;
+  left: -99%;
+  width: 100%;
+}
+
+.menuicon{
+  height: inherit;
+}
+
+#shim{
+  height: 35rem;
+}
+
+p{height:20rem;}
+
+p.description{
+  margin-bottom: 0.6em;
+}
+
+p.link{
+}
+
+li.link{
+  width:auto;
+  margin: 5rem 20rem;
+  padding: 5rem 10rem;
+  border-width: 3rem;
+  border-color: #AAA;
+  border-style: solid;
+  border-radius: 6px;
+  color:#000;
+  background-color: #FFF;
+}
+
+#content{
+  width:75%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+#title-area{
+  color:#000;
+  background-color: #FFF;
+  padding: 10rem;
+  border-color: #AAA;
+  border-style: solid;
+  border-bottom-width: 4rem;
+  border-left-width: 2rem;
+  border-right-width: 2rem;
+  border-radius: 0rem 0rem 6rem 6rem;
+}
+
+#list-area{
+
+}
